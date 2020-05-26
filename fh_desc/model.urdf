@@ -581,26 +581,20 @@
       </material>
     </collision>
   </link>
+  <joint name="H1_F1_tip" type="fixed">
+    <parent link="H1_F1_link_2"/>
+    <child link="H1_F1_tip"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+  </joint>
   <link name="H1_F1_optoforce"/>
-  <joint name="H1_F1_tip_to_optoforce" type="revolute">
+  <joint name="H1_F1_tip_to_optoforce" type="fixed">
     <parent link="H1_F1_tip"/>
     <child link="H1_F1_optoforce"/>
     <origin rpy="-0.35 0 0" xyz="0 -0.006 0.046"/>
-    <axis xyz="1 0 0"/>
-    <limit effort="10" lower="0" upper="0" velocity="1"/>
-    <dynamics damping="0.0" friction="0.0"/>
   </joint>
-
-  <joint name="H1_F1_tip" type="revolute">
-    <parent link="H1_F1_link_2"/>
-    <child link="H1_F1_tip"/>
-    <limit effort="10" lower="0" upper="0" velocity="1"/>
-    <dynamics damping="0.0" friction="0.0"/>
-  </joint>
-
 
   <!--Adding ft sensor -->
-  <gazebo reference="H1_F1_tip_to_optoforce">
+  <gazebo reference="H1_F1J3">
     <provideFeedback>true</provideFeedback>
   </gazebo>
 
@@ -608,8 +602,8 @@
   <gazebo>
         <plugin name="F1_ft_sensor" filename="libgazebo_ros_ft_sensor.so">
         <updateRate>1000.0</updateRate>
-        <topicName>F1_tip/ft_sensor_topic</topicName> 
-        <jointName>H1_F1_tip_to_optoforce</jointName>
+        <topicName>/H1_F1J3/ft_sensor_topic</topicName> 
+        <jointName>H1_F1J3</jointName>
         </plugin>
   </gazebo>
 
